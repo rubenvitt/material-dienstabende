@@ -1,353 +1,150 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenR Funken Aktionskarten</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9fafb;
-        }
-
-        header {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            color: white;
-            padding: 2rem 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        nav {
-            background: #1f2937;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            transition: background 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            background: rgba(255,255,255,0.1);
-        }
-
-        .btn-primary {
-            background: #2563eb;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .btn-primary:hover {
-            background: #1d4ed8;
-            transform: translateY(-1px);
-        }
-
-        main {
-            padding: 3rem 0;
-        }
-
-        .hero {
-            background: white;
-            border-radius: 12px;
-            padding: 3rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 3rem;
-        }
-
-        .hero h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: #1f2937;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: #6b7280;
-            margin-bottom: 1.5rem;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .feature {
-            background: #f3f4f6;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid #059669;
-        }
-
-        .feature h3 {
-            color: #059669;
-            margin-bottom: 0.5rem;
-        }
-
-        .feature p {
-            color: #4b5563;
-        }
-
-        .category-overview {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .category-overview h2 {
-            margin-bottom: 1.5rem;
-            color: #1f2937;
-        }
-
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .category-card {
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .category-card:hover {
-            transform: translateY(-2px);
-        }
-
-        .category-easy {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .category-medium {
-            background: #fed7aa;
-            color: #92400e;
-        }
-
-        .category-hard {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .category-tech {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-
-        .category-transport {
-            background: #e9d5ff;
-            color: #5b21b6;
-        }
-
-        .category-count {
-            font-size: 2rem;
-            font-weight: bold;
-            display: block;
-            margin-top: 0.5rem;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .btn-secondary {
-            background: #6b7280;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .btn-secondary:hover {
-            background: #4b5563;
-            transform: translateY(-1px);
-        }
-
-        .info-section {
-            background: #fef3c7;
-            border: 1px solid #fbbf24;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .info-section h3 {
-            color: #d97706;
-            margin-bottom: 0.5rem;
-        }
-
-        .info-section p {
-            color: #92400e;
-        }
-
-        footer {
-            background: #1f2937;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 4rem;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .hero {
-                padding: 2rem;
-            }
-            
-            .nav-links {
-                justify-content: center;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <h1>OpenR Funken Aktionskarten</h1>
-            <p class="subtitle">Trainingsmaterial für Sanitätsdienst-Funkkommunikation</p>
-        </div>
-    </header>
-
-    <nav>
-        <div class="container">
-            <div class="nav-links">
-                <a href="../">← Zurück zur Übersicht</a>
-                <a href="planspiel-openr.html" class="btn-primary">Druckversion öffnen</a>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>OpenR Funken Aktionskarten</title>
+        <link rel="stylesheet" href="index-styles.css">
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <h1>OpenR Funken Aktionskarten</h1>
+                <p class="subtitle">
+                    Trainingsmaterial für Sanitätsdienst-Funkkommunikation
+                </p>
             </div>
-        </div>
-    </nav>
+        </header>
 
-    <main class="container">
-        <div class="hero">
-            <h2>Willkommen beim Funk-Planspiel</h2>
-            <p>Diese Aktionskarten wurden speziell für das Training der Funkkommunikation im Sanitätsdienst bei Großveranstaltungen entwickelt. Sie bieten realistische Szenarien und helfen dabei, strukturierte und klare Kommunikation unter Stress zu üben.</p>
-            
-            <div class="features-grid">
-                <div class="feature">
-                    <h3>📻 Realistische Szenarien</h3>
-                    <p>Alle Karten basieren auf echten Situationen aus dem Sanitätsdienst bei Großveranstaltungen.</p>
-                </div>
-                <div class="feature">
-                    <h3>🎯 Strukturiertes Training</h3>
-                    <p>Klare Aufgabenstellungen fördern die korrekte Funkkommunikation und Meldeketten.</p>
-                </div>
-                <div class="feature">
-                    <h3>📈 Steigende Schwierigkeit</h3>
-                    <p>Von einfachen Meldungen bis zu komplexen Notfallsituationen - für jedes Trainingsniveau.</p>
+        <nav>
+            <div class="container">
+                <div class="nav-links">
+                    <a href="../">← Zurück zur Übersicht</a>
+                    <a href="planspiel-openr.html" class="btn-primary"
+                        >Druckversion öffnen</a
+                    >
                 </div>
             </div>
-        </div>
+        </nav>
 
-        <div class="category-overview">
-            <h2>Kategorien im Überblick</h2>
-            <div class="categories">
-                <div class="category-card category-easy">
-                    <h3>Einfach</h3>
-                    <p>Grundlagen der Funkkommunikation</p>
-                    <span class="category-count">5</span>
-                </div>
-                <div class="category-card category-medium">
-                    <h3>Mittel</h3>
-                    <p>Patientenmeldungen</p>
-                    <span class="category-count">6</span>
-                </div>
-                <div class="category-card category-hard">
-                    <h3>Schwer</h3>
-                    <p>Notfälle & Großlagen</p>
-                    <span class="category-count">8</span>
-                </div>
-                <div class="category-card category-tech">
-                    <h3>Technik</h3>
-                    <p>Funk & Koordination</p>
-                    <span class="category-count">11</span>
-                </div>
-                <div class="category-card category-transport">
-                    <h3>Transport</h3>
-                    <p>Transportorganisation</p>
-                    <span class="category-count">5</span>
+        <main class="container">
+            <div class="hero">
+                <h2>Willkommen beim Funk-Planspiel</h2>
+                <p>
+                    Diese Aktionskarten wurden speziell für das Training der
+                    Funkkommunikation im Sanitätsdienst bei Großveranstaltungen
+                    entwickelt. Sie bieten realistische Szenarien und helfen
+                    dabei, strukturierte und klare Kommunikation unter Stress zu
+                    üben.
+                </p>
+
+                <div class="features-grid">
+                    <div class="feature">
+                        <h3>📻 Realistische Szenarien</h3>
+                        <p>
+                            Alle Karten basieren auf echten Situationen aus dem
+                            Sanitätsdienst bei Großveranstaltungen.
+                        </p>
+                    </div>
+                    <div class="feature">
+                        <h3>🎯 Strukturiertes Training</h3>
+                        <p>
+                            Klare Aufgabenstellungen fördern die korrekte
+                            Funkkommunikation und Meldeketten.
+                        </p>
+                    </div>
+                    <div class="feature">
+                        <h3>📈 Steigende Schwierigkeit</h3>
+                        <p>
+                            Von einfachen Meldungen bis zu komplexen
+                            Notfallsituationen - für jedes Trainingsniveau.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="info-section">
-            <h3>🖨️ Druckanleitung</h3>
-            <p><strong>Format:</strong> Die Karten sind für den Druck auf A4 im Querformat optimiert. Pro Seite werden 8 Karten (2x4) angeordnet.</p>
-            <p style="margin-top: 0.5rem;"><strong>Empfehlung:</strong> Drucken Sie die Karten auf festem Papier (160-200g/m²) und schneiden Sie sie anschließend aus. Die gestrichelten Linien dienen als Schnittmarken.</p>
-        </div>
+            <div class="category-overview">
+                <h2>Kategorien im Überblick</h2>
+                <div class="categories">
+                    <div class="category-card category-easy">
+                        <h3>Einfach</h3>
+                        <p>Grundlagen der Funkkommunikation</p>
+                        <span class="category-count">5</span>
+                    </div>
+                    <div class="category-card category-medium">
+                        <h3>Mittel</h3>
+                        <p>Patientenmeldungen</p>
+                        <span class="category-count">6</span>
+                    </div>
+                    <div class="category-card category-hard">
+                        <h3>Schwer</h3>
+                        <p>Notfälle & Großlagen</p>
+                        <span class="category-count">8</span>
+                    </div>
+                    <div class="category-card category-tech">
+                        <h3>Technik</h3>
+                        <p>Funk & Koordination</p>
+                        <span class="category-count">11</span>
+                    </div>
+                    <div class="category-card category-transport">
+                        <h3>Transport</h3>
+                        <p>Transportorganisation</p>
+                        <span class="category-count">5</span>
+                    </div>
+                </div>
+            </div>
 
-        <div class="action-buttons">
-            <a href="planspiel-openr.html" class="btn-primary">Druckversion anzeigen</a>
-            <a href="#" onclick="window.print(); return false;" class="btn-secondary">Direkt drucken</a>
-        </div>
+            <div class="info-section">
+                <h3>🖨️ Druckanleitung</h3>
+                <p>
+                    <strong>Format:</strong> Die Karten sind für den Druck auf
+                    A4 im Querformat optimiert. Pro Seite werden 8 Karten (2x4)
+                    angeordnet.
+                </p>
+                <p style="margin-top: 0.5rem">
+                    <strong>Empfehlung:</strong> Drucken Sie die Karten auf
+                    festem Papier (160-200g/m²) und schneiden Sie sie
+                    anschließend aus. Die gestrichelten Linien dienen als
+                    Schnittmarken.
+                </p>
+            </div>
 
-        <div class="info-section" style="background: #dbeafe; border-color: #3b82f6;">
-            <h3>💡 Trainingstipps</h3>
-            <p><strong>Für Ausbilder:</strong> Beginnen Sie mit den einfachen Karten und steigern Sie die Schwierigkeit schrittweise. Lassen Sie die Teilnehmer die Situationen laut vorlesen und die Funksprüche üben.</p>
-            <p style="margin-top: 0.5rem;"><strong>Für Teilnehmer:</strong> Achten Sie auf klare Aussprache, verwenden Sie das Buchstabieralphabet und halten Sie die Funkdisziplin ein. Üben Sie besonders die 5-W-Regel bei Notfallmeldungen.</p>
-        </div>
-    </main>
+            <div class="action-buttons">
+                <a href="planspiel-openr.html" class="btn-primary"
+                    >Druckversion anzeigen</a
+                >
+                <button
+                    onclick="window.open('planspiel-openr.html').print();"
+                    class="btn-secondary"
+                >
+                    🖨️ Planspiel drucken
+                </button>
+            </div>
 
-    <footer>
-        <div class="container">
-            <p>OpenR Uelzen - Funkübung Trainingsmaterial</p>
-        </div>
-    </footer>
-</body>
+            <div
+                class="info-section"
+                style="background: #dbeafe; border-color: #3b82f6"
+            >
+                <h3>💡 Trainingstipps</h3>
+                <p>
+                    <strong>Für Ausbilder:</strong> Beginnen Sie mit den
+                    einfachen Karten und steigern Sie die Schwierigkeit
+                    schrittweise. Lassen Sie die Teilnehmer die Situationen laut
+                    vorlesen und die Funksprüche üben.
+                </p>
+                <p style="margin-top: 0.5rem">
+                    <strong>Für Teilnehmer:</strong> Achten Sie auf klare
+                    Aussprache, verwenden Sie das Buchstabieralphabet und halten
+                    Sie die Funkdisziplin ein. Üben Sie besonders die 5-W-Regel
+                    bei Notfallmeldungen.
+                </p>
+            </div>
+        </main>
+
+        <footer>
+            <div class="container">
+                <p>OpenR Uelzen - Funkübung Trainingsmaterial</p>
+            </div>
+        </footer>
+    </body>
 </html>
